@@ -17,9 +17,7 @@ def batchdo ( path ):
             continue
         nfiles[ nfiles.index( item ) ] = str( num ).zfill( 3 ) + item
         print ( item  )
-    confirm = input( 'confirm to rename all the files in the folder??\ny|
-
-n\n' )
+    confirm = input( 'confirm to rename all the files in the folder??\ny|n\n' )
     if confirm == 'y':
         out = open( 'record_of_work.txt' , 'w')
         out.write( 'all names of files before renaming:\n\n' )
@@ -43,9 +41,7 @@ files in bulk:\n' )
             batchdo( path )
             break
         else:
-            order = input( '\nWARNING:the path you input is not valid , 
-
-program will function in default path!\nagree or not??\n' )
+            order = input( '\nWARNING:the path you input is not valid , program will function in default path!\nagree or not??\n' )
             if order == 'y':
                 batchdo( os.getcwd() )
                 break
