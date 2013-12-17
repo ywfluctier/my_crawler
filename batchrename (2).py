@@ -17,7 +17,7 @@ def batchdo ( path ):                #批量处理
             del nfiles[ num ] , files[ num ]
         else:
             out.write( item + '\n' )
-    select = input( '\nplease choose a way of renaming:\n1 for adding from the left\n2 for adding from the right without the extension included\n' )
+    select = raw_input( '\nplease choose a way of renaming:\n1 for adding from the left\n2 for adding from the right without the extension included\n' )
     if int( select.strip() ) == 1:                #选择重命名方式
         rel( files , nfiles )
     elif int( select.strip() ) == 2:
@@ -36,21 +36,21 @@ def batchdo ( path ):                #批量处理
     out.close()
 
 def rer( files , nfiles ):
-    way1 = input( '\nplease choose a filling way:\n1 for sequence number filling\n2 for character string filling\n' )
+    way1 = raw_input( '\nplease choose a filling way:\n1 for sequence number filling\n2 for character string filling\n' )
     while way1:
         if int( way1.strip() ) == 1:
             num = 1
-            width = input( '\nplease input the filling width:\n' ).strip()
+            width = raw_input( '\nplease input the filling width:\n' ).strip()
             while not isinstance( int( width ) , int ):		#判断数据类型
-                width = input( '\nINVALID VALUE!please input again!\n' ).strip()
-            connec = input( '\nplease input the connection:\ninput \"None\" or nothing to skip\n' )
+                width = raw_input( '\nINVALID VALUE!please input again!\n' ).strip()
+            connec = raw_input( '\nplease input the connection:\ninput \"None\" or nothing to skip\n' )
             for item in nfiles:
                 pos = item.rfind( '.' )                #寻找小数点的位置
                 nfiles[ nfiles.index( item ) ] = item[ :pos ] + str( num ).zfill( int( width ) ) + str( connec ) + item[ pos: ]         #用0填充
                 num += 1
         elif int( way1.strip() ) == 2:
-            sign = input( '\nplease input the string to add:\n' )
-            connec = input( '\nplease input the connection:\ninput \"None\" or nothing to skip\n' )
+            sign = raw_input( '\nplease input the string to add:\n' )
+            connec = raw_input( '\nplease input the connection:\ninput \"None\" or nothing to skip\n' )
             for item in nfiles:
                 pos = item.rfind( '.' )
                 nfiles[ nfiles.index( item ) ] = item[:pos ] + str( connec ) + str( sign ) + item[ pos: ]
@@ -60,20 +60,20 @@ def rer( files , nfiles ):
     gorename( files , nfiles )
 
 def rel( files , nfiles ):
-    way1 = input( '\nplease choose a filling way:\n1 for sequence number filling\n2 for character string filling\n' )
+    way1 = raw_input( '\nplease choose a filling way:\n1 for sequence number filling\n2 for character string filling\n' )
     while way1:
         if int( way1.strip() ) == 1:
             num = 1
-            width = input( '\nplease input the filling width:\n' ).strip()
+            width = raw_input( '\nplease input the filling width:\n' ).strip()
             while not isinstance( int( width ) , int ):
-                width = input( '\nINVALID VALUE!please input again!\n' ).strip()
-            connec = input( '\nplease input the connection:\ninput \"None\" or nothing to skip\n' )
+                width = raw_input( '\nINVALID VALUE!please input again!\n' ).strip()
+            connec = raw_input( '\nplease input the connection:\ninput \"None\" or nothing to skip\n' )
             for item in nfiles:
                 nfiles[ nfiles.index( item ) ] = str( num ).zfill( int( width ) ) + str( connec ) + item
                 num += 1
         elif int( way1.strip() ) == 2:
-            sign = input( '\nplease input the string to add:\n' )
-            connec = input( '\nplease input the connection:\ninput \"None\" or nothing to skip\n' )
+            sign = raw_input( '\nplease input the string to add:\n' )
+            connec = raw_input( '\nplease input the connection:\ninput \"None\" or nothing to skip\n' )
             for item in nfiles:
                 nfiles[ nfiles.index( item ) ] = str( sign ) + str( connec ) + item
         else:
@@ -82,7 +82,7 @@ def rel( files , nfiles ):
     gorename( files , nfiles )
 
 def gorename( a , b ):                #负责重命名操作的核心函数
-    confirm = input( 'confirm to rename all the files in the folder??\ny|n\n' )
+    confirm = raw_input( 'confirm to rename all the files in the folder??\ny|n\n' )
     if confirm.strip() == 'y':
         for item in a:
             os.rename( item , b[ a.index( item ) ] )
@@ -91,18 +91,18 @@ def gorename( a , b ):                #负责重命名操作的核心函数
         print ( '\naction aborted!\n' )
 
 def main():
-    path = input( 'input the path of the folder you\'d like to rename files in bulk:\n' )
+    path = raw_input( 'input the path of the folder you\'d like to rename files in bulk:\n' )
     while path:
         if os.path.exists( path ):                #判断路径是否有效
             batchdo( path )
             break
         else:
-            order = input( '\nWARNING:\nthe path you input is not valid, program will function in default path!\nagree or not??\n' )
+            order = raw_input( '\nWARNING:\nthe path you input is not valid, program will function in default path!\nagree or not??\n' )
             if order.strip() == 'y':
                 batchdo( os.getcwd() )        #使用当前地址
                 break
             else:
                 print ("\nthen check the path and input again!")
-                path = input( 'input the path of the folder you\'d like to rename files in bulk:\n' )
+                path = raw_input( 'input the path of the folder you\'d like to rename files in bulk:\n' )
 if __name__ == '__main__':
     main()
